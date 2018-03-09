@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backActivity"
+    tools:context="com.synergics.ishom.jualikanid_user.PemabyaranActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:theme="@style/ToolbarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#fff"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/toolbarTittle"
+                    android:text=""
+                    android:textColor="@color/blueFont"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Ikan yand dibeli"
+                    android:textSize="18dp"
+                    android:textColor="@color/black34"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Total"
+                        android:textColor="@color/black34"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/totalKeranjang"
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Rp. 0"
+                        android:gravity="right"
+                        android:textColor="@color/darkBlue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Lokasi Pengiriman"
+                        android:textColor="@color/black34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/btnUbahAlamat"
+                        android:clickable="true"
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Ubah"
+                        android:gravity="right"
+                        android:textColor="@color/darkBlue"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        app:srcCompat="@drawable/icon_lokasi_penjemputan"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:id="@+id/txtAlamat"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Alamat"
+                        android:textColor="@color/black34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Total Pembayaran"
+                        android:textColor="@color/black34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        app:srcCompat="@drawable/icon_cart"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Total Keranjang"
+                        android:textColor="@color/black34"
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/totalKeranjang2"
+                        android:layout_marginLeft="12dp"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Rp.0"
+                        android:textColor="@color/darkBlue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        app:srcCompat="@drawable/icon_car"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Biaya Pengiriman"
+                        android:textColor="@color/black34"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/totalDelivery"
+                        android:layout_marginLeft="12dp"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Rp.0"
+                        android:textColor="@color/darkBlue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Total"
+                        android:textColor="@color/black34"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/totalPembayaran"
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Rp. 0"
+                        android:gravity="right"
+                        android:textColor="@color/darkBlue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Waktu Pengiriman"
+                    android:textSize="18dp"
+                    android:textColor="@color/black34"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleWaktu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textSize="18dp"
+                        android:text="Cara Pembayaran"
+                        android:textColor="@color/black34"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/backActivity"
+                    android:layout_height="1dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioPembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radioCash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+
+                        <ImageView
+                            android:layout_marginRight="12dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_width="24dp"
+                            app:srcCompat="@drawable/icon_cash"
+                            android:layout_height="24dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:textSize="16dp"
+                            android:text="Cash saat barang sudah diantar"
+                            android:textColor="@color/black34"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radioTransfer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:layout_marginRight="12dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_width="24dp"
+                            app:srcCompat="@drawable/icon_transfer"
+                            android:layout_height="24dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:textSize="16dp"
+                            android:text="Transfer"
+                            android:textColor="@color/black34"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radioSaldo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:layout_marginRight="12dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_width="24dp"
+                            app:srcCompat="@drawable/icon_wallet"
+                            android:layout_height="24dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:textSize="16dp"
+                                android:text="Saldo"
+                                android:textColor="@color/black34"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/saldo"
+                                android:layout_weight="1"
+                                android:textSize="16dp"
+                                android:text="Rp. 0"
+                                android:textColor="@color/darkBlue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Untuk harga diatas masih harga estimasi .Untuk harga biaya pengiriman diatas masih bisa lebih murah .Untuk pengiriman luar kota masih belum termasuk biaya tol dan lain-lain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnPemesanan"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_margin="16dp"
+                android:textColor="#fff"
+                android:textSize="16dp"
+                android:textAllCaps="false"
+                android:text="Order"
+                android:background="@drawable/back_blue_dark_rounded_4dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

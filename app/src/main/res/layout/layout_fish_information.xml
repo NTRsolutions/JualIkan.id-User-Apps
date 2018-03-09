@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/layoutPager"
+    android:background="@color/backActivity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/imgPager"
+        android:layout_marginRight="@dimen/fish_detail"
+        android:layout_marginLeft="@dimen/fish_detail"
+        android:layout_marginTop="@dimen/fish_detail"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@+id/toolbar" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        app:centered="true"
+        app:fillColor="@color/darkBlue"
+        app:pageColor="#fff"
+        app:snap="false" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/back_white_rounded_8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="@dimen/fish_detail"
+        android:layout_marginLeft="@dimen/fish_detail"
+        android:padding="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nama"
+            android:textSize="18dp"
+            android:textColor="@color/black34"
+            android:text="Nama Ikan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/bgRating"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:progressBackgroundTint="#000000"
+                android:progressTint="#FFDF4A"
+                android:rating="3"
+                android:theme="@style/RatingBar"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"/>
+
+            <TextView
+                android:id="@+id/ratingText"
+                android:text="0 Reviews"
+                android:textSize="12dp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/harga"
+            android:textSize="18dp"
+            android:textColor="@color/darkBlue"
+            android:text="Rp. 0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/image1"
+                    app:srcCompat="@drawable/icon_ikan_tambak"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp" />
+
+                <LinearLayout
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image1">
+
+                    <TextView
+                        android:textColor="@color/black34"
+                        android:textSize="11dp"
+                        android:text="Kategori Ikan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/kategori"
+                        android:textColor="@color/blackB2"
+                        android:textSize="14dp"
+                        android:text="Kategori Ikan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/image2"
+                    app:srcCompat="@drawable/icon_ikan_weight"
+                    android:layout_width="28dp"
+                    android:layout_height="24dp" />
+
+                <LinearLayout
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image2">
+
+                    <TextView
+                        android:textColor="@color/black34"
+                        android:textSize="11dp"
+                        android:text="Ukuran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/ukuran"
+                        android:textColor="@color/blackB2"
+                        android:textSize="14dp"
+                        android:text="Ukuran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/image3"
+                    app:srcCompat="@drawable/icon_ikan_checked"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp" />
+
+                <LinearLayout
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image3">
+
+                    <TextView
+                        android:textColor="@color/black34"
+                        android:textSize="11dp"
+                        android:text="Kondisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/kondisi"
+                        android:textColor="@color/blackB2"
+                        android:textSize="14dp"
+                        android:text="Kondisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/image4"
+                    app:srcCompat="@drawable/icon_ikan_tambak"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp" />
+
+                <LinearLayout
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image4">
+
+                    <TextView
+                        android:textColor="@color/black34"
+                        android:textSize="11dp"
+                        android:text="Ketersediaan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/ketersediaan"
+                        android:textColor="@color/blackB2"
+                        android:textSize="14dp"
+                        android:text="Ketersediaan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:textSize="18dp"
+            android:textColor="@color/black34"
+            android:text="Deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/caption"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/blackB2"
+            android:text="Deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bgReview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/back_white_rounded_4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Reviews"
+            android:textColor="@color/black34"
+            android:textSize="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/reviewPager"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@+id/toolbar" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/reviewIndicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-20dp"
+            app:centered="true"
+            app:fillColor="@color/darkBlue"
+            app:pageColor="#fff"
+            app:snap="false" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="3dp"
+        android:text="Tambahkan ke Keranjang"
+        android:layout_marginRight="@dimen/fish_detail"
+        android:layout_marginLeft="@dimen/fish_detail"
+        android:textColor="@color/putih"
+        android:textAllCaps="false"
+        android:background="@drawable/back_blue_dark_rounded_8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

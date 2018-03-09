@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@+id/layoutPager"
+    android:layout_width="match_parent"
+    android:paddingTop="16dp"
+    android:paddingRight="18dp"
+    android:paddingLeft="18dp"
+    android:paddingBottom="36dp"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nama"
+            android:text="Nama reviewer"
+            android:textSize="16dp"
+            android:maxLines="1"
+            android:textColor="@color/black34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RatingBar
+            android:id="@+id/ratingReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:progressBackgroundTint="#000000"
+            android:progressTint="#FFDF4A"
+            android:rating="3"
+            android:theme="@style/RatingBar"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"/>
+
+        <TextView
+            android:id="@+id/pesanReview"
+            android:textColor="#9c9c9c"
+            android:text="Pesan Review adalah bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
