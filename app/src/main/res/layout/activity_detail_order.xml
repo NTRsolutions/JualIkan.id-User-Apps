@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backActivity"
-    tools:context="com.synergics.ishom.jualikanid_user.PemabyaranActivity">
-
+    tools:context="com.synergics.ishom.jualikanid_user.DetailOrderActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -56,6 +55,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:orientation="horizontal"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/orderID"
+                    android:textSize="18dp"
+                    android:text="Order Status"
+                    android:textColor="@color/black34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/statusOrder"
+                    android:textSize="18dp"
+                    android:gravity="right"
+                    android:text="Status Pengiriman"
+                    android:textColor="@color/orange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:padding="18dp"
+                android:visibility="gone"
+                android:id="@+id/orderPayment"
+                android:orientation="horizontal"
+                android:background="@drawable/back_white_rounded_4dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="18dp"
+                    android:text="Payment Link"
+                    android:textColor="@color/black34"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/oderPaymentLink"
+                    android:textSize="18dp"
+                    android:gravity="right"
+                    android:text="Link Pembayaran"
+                    android:textColor="@color/blueFont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="16dp"
@@ -145,17 +204,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/btnUbahAlamat"
-                        android:clickable="true"
-                        android:layout_weight="1"
-                        android:textSize="18dp"
-                        android:text="Ubah"
-                        android:gravity="right"
-                        android:textColor="@color/darkBlue"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content" />
-
                 </LinearLayout>
 
                 <ImageView
@@ -193,9 +241,7 @@
 
 
             <LinearLayout
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_margin="16dp"
                 android:layout_width="match_parent"
                 android:padding="18dp"
                 android:orientation="vertical"
@@ -324,202 +370,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_width="match_parent"
-                android:padding="18dp"
-                android:orientation="vertical"
-                android:background="@drawable/back_white_rounded_4dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:text="Waktu Pengiriman"
-                    android:textSize="18dp"
-                    android:textColor="@color/black34"
-                    android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/backActivity"
-                    android:layout_height="1dp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycleWaktu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_width="match_parent"
-                android:padding="18dp"
-                android:orientation="vertical"
-                android:background="@drawable/back_white_rounded_4dp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textSize="18dp"
-                        android:text="Cara Pembayaran"
-                        android:textColor="@color/black34"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/backActivity"
-                    android:layout_height="1dp" />
-
-                <RadioGroup
-                    android:id="@+id/radioPembayaran"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content">
-
-                            android:id="@+id/radioCash"
-                        <CheckBox
-                            android:id="@+id/radioCash"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-
-                        <ImageView
-                            android:layout_marginRight="12dp"
-                            android:layout_marginLeft="6dp"
-                            android:layout_width="24dp"
-                            app:srcCompat="@drawable/icon_cash"
-                            android:layout_height="24dp" />
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:textSize="16dp"
-                            android:text="Cash saat barang sudah diantar"
-                            android:textColor="@color/black34"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="wrap_content">
-
-                        <CheckBox
-                            android:id="@+id/radioTransfer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <ImageView
-                            android:layout_marginRight="12dp"
-                            android:layout_marginLeft="6dp"
-                            android:layout_width="24dp"
-                            app:srcCompat="@drawable/icon_transfer"
-                            android:layout_height="24dp" />
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:textSize="16dp"
-                            android:text="Transfer"
-                            android:textColor="@color/black34"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="wrap_content">
-
-                        <CheckBox
-                            android:id="@+id/radioSaldo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <ImageView
-                            android:layout_marginRight="12dp"
-                            android:layout_marginLeft="6dp"
-                            android:layout_width="24dp"
-                            app:srcCompat="@drawable/icon_wallet"
-                            android:layout_height="24dp" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:textSize="16dp"
-                                android:text="Saldo"
-                                android:textColor="@color/black34"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/saldo"
-                                android:layout_weight="1"
-                                android:textSize="16dp"
-                                android:text="Rp. 0"
-                                android:textColor="@color/darkBlue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Untuk harga diatas masih harga estimasi .Untuk harga biaya pengiriman diatas masih bisa lebih murah .Untuk pengiriman luar kota masih belum termasuk biaya tol dan lain-lain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnPemesanan"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_margin="16dp"
-                android:textColor="#fff"
-                android:textSize="16dp"
-                android:textAllCaps="false"
-                android:text="Order"
-                android:background="@drawable/back_blue_dark_rounded_4dp"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

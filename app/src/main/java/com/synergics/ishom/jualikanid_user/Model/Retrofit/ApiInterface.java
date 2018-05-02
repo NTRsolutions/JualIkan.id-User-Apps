@@ -1,5 +1,6 @@
 package com.synergics.ishom.jualikanid_user.Model.Retrofit;
 
+import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsAdress;
 import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsDirectionResponse;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseBantuan;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseFish;
@@ -9,13 +10,18 @@ import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseKeranja
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseKota;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseLogin;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseMessage;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseMidtransSnap;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderDetail;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderProcessed;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponsePembayaran;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseRegister;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.Direction;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.NearbyLocation;
+import com.synergics.ishom.jualikanid_user.View.Object.MidtransPayment;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -43,12 +49,21 @@ public interface ApiInterface {
                                               @Query("sensor") boolean sensor,
                                               @Query("mode") String mode);
 
+    @GET("geocode/json?key=AIzaSyBoFfYEuwzXaVwF07dt30KvYZM9vJXUGb0")
+    Call<GMapsAdress> getAddress(@Query("latlng") String origin,
+                                 @Query("sensor") boolean sensor);
+
     @GET("place/nearbysearch/json?key=AIzaSyBoFfYEuwzXaVwF07dt30KvYZM9vJXUGb0")
     Call<NearbyLocation> getNearby(@Query("location") String location,
                                    @Query("radius") String radius,
                                    @Query("types") String type);
 
     //================================= JualIkan.id endpoint web service ============================================//
+
+    @POST("checkout.php")
+    Call<ResponseMidtransSnap> snapMidtrans(@Body MidtransPayment body);
+
+    //====================================  midtrans endpoint web service  ===========================================//
 
     @Multipart
     @POST("login.php")
@@ -66,6 +81,24 @@ public interface ApiInterface {
                                     @Part("alamat") RequestBody alamat);
 
     @Multipart
+    @POST("order-post.php")
+    Call<ResponseRegister> postOrder(@Part("postIdKeranjang") RequestBody postIdKeranjang,
+                                     @Part("postIdUser") RequestBody postIdUser,
+                                     @Part("postAlamat") RequestBody postAlamat,
+                                     @Part("postLatAlamat") RequestBody postLatAlamat,
+                                     @Part("postLngAlamat") RequestBody postLngAlamat,
+                                     @Part("postPaymentType") RequestBody postPaymentType,
+                                     @Part("postIdKoperasi") RequestBody postIdKoperasi,
+                                     @Part("postWaktuPengiriman") RequestBody postWaktuPengiriman,
+                                     @Part("postJarakPengiriman") RequestBody postJarakPengiriman,
+                                     @Part("postPaymentUrl") RequestBody postPaymentUrl,
+                                     @Part("postBiayaPengiriman") RequestBody postBiayaPengiriman,
+                                     @Part("postBeratOrder") RequestBody postBeratOrder,
+                                     @Part("postTotalPembayaran") RequestBody postTotalPembayaran,
+                                     @Part("postIdWaktuPengiriman") RequestBody postIdWaktuPengiriman,
+                                     @Part("postOrderStatus") RequestBody postOrderStatus);
+
+    @Multipart
     @POST("menu.php")
     Call<ResponseHome> menu(@Part("lat") RequestBody lat,
                             @Part("lng") RequestBody lng);
@@ -75,6 +108,14 @@ public interface ApiInterface {
     Call<ResponseKeranjang> keranjang(@Part("id_user") RequestBody id_user,
                                       @Part("cart_id") RequestBody cart_id,
                                       @Part("jumlah") RequestBody jumlah);
+
+    @Multipart
+    @POST("get-processed-order.php")
+    Call<ResponseOrderProcessed> orderProcessed(@Part("id_user") RequestBody id_user);
+
+    @Multipart
+    @POST("get-expired-order.php")
+    Call<ResponseOrderProcessed> orderFinished(@Part("id_user") RequestBody id_user);
 
     @Multipart
     @POST("payment_detail.php")
@@ -93,6 +134,10 @@ public interface ApiInterface {
                                     @Part("search") RequestBody search);
 
     @Multipart
+    @POST("processed-order-detail.php")
+    Call<ResponseOrderDetail> processed_order_detail(@Part("order_id") RequestBody order_id);
+
+    @Multipart
     @POST("fish.php")
     Call<ResponseFish> fish(@Part("fish_id") RequestBody fish_id);
 
@@ -109,5 +154,7 @@ public interface ApiInterface {
     @POST("first-add-cart.php")
     Call<ResponseMessage> addkeranjang(@Part("user_id") RequestBody user,
                                        @Part("fish_id") RequestBody fish,
+                                       @Part("lat") RequestBody lat,
+                                       @Part("lng") RequestBody lng,
                                        @Part("koperasi_id") RequestBody koperasi);
 }

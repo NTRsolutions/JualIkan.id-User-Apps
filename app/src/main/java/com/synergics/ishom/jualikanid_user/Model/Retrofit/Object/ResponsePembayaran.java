@@ -12,6 +12,8 @@ public class ResponsePembayaran {
     @SerializedName("response") public int response;
     @SerializedName("status") public boolean status;
     @SerializedName("message") public String message;
+    @SerializedName("statusOrder") public boolean statusOrder;
+    @SerializedName("statusMessage") public String messageOrder;
     @SerializedName("cart") public Keranjang cart;
     @SerializedName("delivery_time") public List<DeliveryTime> deliveryTimes;
     @SerializedName("payment_type") public List<PaymentType> paymentTypes;
@@ -28,6 +30,27 @@ public class ResponsePembayaran {
         @SerializedName("delivery_time_name") public String delivery_time_name;
         @SerializedName("delivery_time_start") public String delivery_time_start;
         @SerializedName("delivery_time_end") public String delivery_time_end;
+        @SerializedName("status") public int status;
+        @SerializedName("message") public String message;
+
+//        private RadioButton radioButton = null;
+        private int cheked = 0;
+
+        public int getCheked() {
+            return cheked;
+        }
+
+        public void setCheked(int cheked) {
+            this.cheked = cheked;
+        }
+
+//        public RadioButton getRadioButton() {
+//            return radioButton;
+//        }
+//
+//        public void setRadioButton(RadioButton radioButton) {
+//            this.radioButton = radioButton;
+//        }
     }
 
     public class PaymentType{
@@ -36,6 +59,7 @@ public class ResponsePembayaran {
     }
 
     public class Koperasi {
+        @SerializedName("id") public String id;
         @SerializedName("nama") public String nama;
         @SerializedName("lat") public String lat;
         @SerializedName("lng") public String lng;

@@ -71,10 +71,7 @@ public class KeranjangActivity extends AppCompatActivity {
     }
 
     private void setRecycleview() {
-        recyclerView = findViewById(R.id.recycle);
-        manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager);
-        slimAdapter = SlimAdapter.create()
+        R
                 .register(R.layout.layout_cart_item, new SlimInjector<ResponseKeranjang.Keranjang>() {
                     @Override
                     public void onInject(final ResponseKeranjang.Keranjang data, IViewInjector injector) {
@@ -145,8 +142,12 @@ public class KeranjangActivity extends AppCompatActivity {
 
                     if (res.status){
                         if (res.data.size() == 0){
+                            items.clear();
                             TextView text = (TextView) findViewById(R.id.txtNotFound);
                             text.setVisibility(TextView.VISIBLE);
+
+                            btnPembayaran.setText("Pembayaran (Rp. 0)");
+
                         }else {
                             items.clear();
                             for (ResponseKeranjang.Keranjang keranjang : res.data){

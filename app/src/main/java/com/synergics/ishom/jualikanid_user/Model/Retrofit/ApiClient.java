@@ -38,6 +38,28 @@ public class ApiClient {
         return retrofit;
     }
 
+    public static Retrofit midtrans() {
+
+        retrofit = null;
+
+        if(retrofit==null) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .addInterceptor(interceptor)
+                    .addNetworkInterceptor(new StethoInterceptor())
+                    .build();
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://jualikan.herokuapp.com/jualIkan/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }
+
+        return retrofit;
+    }
+
 
     public static Retrofit mapsApi() {
 

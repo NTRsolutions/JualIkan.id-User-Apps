@@ -464,7 +464,8 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra("cat_name", "Ikan Budidaya");
             startActivity(intent);
         } else if (id == R.id.btn_riwayat_order) {
-
+            Intent intent = new Intent(getApplicationContext(), RiwayatOrderActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_bantuan) {
             Intent intent = new Intent(getApplicationContext(), BantuanActivity.class);
             startActivity(intent);

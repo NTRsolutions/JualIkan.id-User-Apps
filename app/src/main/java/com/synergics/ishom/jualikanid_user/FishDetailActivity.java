@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.synergics.ishom.jualikanid_user.Controller.AppConfig;
 import com.synergics.ishom.jualikanid_user.Controller.SQLiteHandler;
+import com.synergics.ishom.jualikanid_user.Controller.Setting;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiClient;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiInterface;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseFish;
@@ -74,6 +75,8 @@ public class FishDetailActivity extends AppCompatActivity {
 
     private String idIkan, idKoperasi;
 
+    private Setting setting;
+
     //toolbar
     private Bundle bundle;
     TextView toolbarTitle;
@@ -85,6 +88,9 @@ public class FishDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fish_detail);
 
         bundle = getIntent().getExtras();
+
+        setting = new Setting(this);
+        setting.forceEnableGPSAcess();
 
         //setting and insialisasi toolbar
         setToolbar();
@@ -254,9 +260,11 @@ public class FishDetailActivity extends AppCompatActivity {
 
         RequestBody reFish = RequestBody.create(MediaType.parse("text/plain"), fish_id);
         RequestBody reUser = RequestBody.create(MediaType.parse("text/plain"), id_user);
+        RequestBody reLat = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(setting.getLatitude()));
+        RequestBody reLng = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(setting.getLongitude()));
         RequestBody reKoperasi = RequestBody.create(MediaType.parse("text/plain"), fish_koperasi_id);
 
-        Call call = apiInterface.addkeranjang(reUser, reFish, reKoperasi);
+        Call call = apiInterface.addkeranjang(reUser, reFish, reLat, reLng, reKoperasi);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
