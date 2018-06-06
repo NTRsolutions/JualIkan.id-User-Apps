@@ -95,10 +95,17 @@ public class FragmentOrderDalamProses extends Fragment {
                                         view.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                Intent intent = new Intent(viewFragment.getContext(), DetailOrderActivity.class);
-                                                intent.putExtra("orderId", data.orderIdNumber);
-                                                intent.putExtra("orderName", "Order " + data.orderId);
-                                                startActivity(intent);
+                                                if (data.orderStatus == "2"){
+                                                    Intent intent = new Intent(viewFragment.getContext(), TrackingDeliveryActivity.class);
+                                                    intent.putExtra("order_id", data.orderIdNumber);
+                                                    startActivity(intent);
+                                                }else {
+                                                    Intent intent = new Intent(viewFragment.getContext(), DetailOrderActivity.class);
+                                                    intent.putExtra("orderId", data.orderIdNumber);
+                                                    intent.putExtra("orderName", "Order " + data.orderId);
+                                                    startActivity(intent);
+                                                }
+
                                             }
                                         });   
                                     }
@@ -190,7 +197,7 @@ public class FragmentOrderDalamProses extends Fragment {
         }else if (status == 3){
             return "Finished";
         }else if (status == 2){
-            return "Sedang di Korim";
+            return "Sedang di Kirim";
         }
         else {
             return "";

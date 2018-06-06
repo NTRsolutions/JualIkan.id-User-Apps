@@ -1,4 +1,4 @@
-package com.synergics.ishom.jualikanid_user.View;
+package com.synergics.ishom.jualikanid_user;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;

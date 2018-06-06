@@ -29,13 +29,11 @@
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:searchBackground="@color/putih"
                 android:textColorHint="@color/blackB2"
-                app:searchSuggestionBackground="@color/darkBlue"
+                android:textColor="@color/black34"
                 app:searchCloseIcon="@drawable/icon_blue_close"
                 app:searchBackIcon="@drawable/icon_arrow_blue"
                 app:searchSuggestionIcon="@drawable/ic_suggestion"
-                android:textColor="@color/black34"
                 />
 
             <LinearLayout

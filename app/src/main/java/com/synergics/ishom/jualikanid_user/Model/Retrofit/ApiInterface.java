@@ -1,7 +1,6 @@
 package com.synergics.ishom.jualikanid_user.Model.Retrofit;
 
 import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsAdress;
-import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsDirectionResponse;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseBantuan;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseFish;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseHome;
@@ -15,6 +14,7 @@ import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderDe
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderProcessed;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponsePembayaran;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseRegister;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseTrackingOrder;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.Direction;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.NearbyLocation;
 import com.synergics.ishom.jualikanid_user.View.Object.MidtransPayment;
@@ -44,7 +44,7 @@ public interface ApiInterface {
                                  @Query("mode") String mode);
 
     @GET("directions/json?key=AIzaSyBoFfYEuwzXaVwF07dt30KvYZM9vJXUGb0")
-    Call<GMapsDirectionResponse> getDirection(@Query("origin") String origin,
+    Call<Direction> getDirection(@Query("origin") String origin,
                                               @Query("destination") String destionation,
                                               @Query("sensor") boolean sensor,
                                               @Query("mode") String mode);
@@ -101,7 +101,8 @@ public interface ApiInterface {
     @Multipart
     @POST("menu.php")
     Call<ResponseHome> menu(@Part("lat") RequestBody lat,
-                            @Part("lng") RequestBody lng);
+                            @Part("lng") RequestBody lng,
+                            @Part("user_id") RequestBody user_id);
 
     @Multipart
     @POST("cart.php")
@@ -157,4 +158,8 @@ public interface ApiInterface {
                                        @Part("lat") RequestBody lat,
                                        @Part("lng") RequestBody lng,
                                        @Part("koperasi_id") RequestBody koperasi);
+
+    @Multipart
+    @POST("order-detail-tracking.php")
+    Call<ResponseTrackingOrder> trackingOrder(@Part("order_id") RequestBody order_id);
 }

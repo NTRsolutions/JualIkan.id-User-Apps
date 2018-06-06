@@ -16,6 +16,7 @@ public class ResponseHome {
     public class Data {
         @SerializedName("promo") public ArrayList<Promo> promos;
         @SerializedName("fish_cat") public ArrayList<FishCat> fishCats;
+        @SerializedName("order_total") public int order_total;
 
         public class FishCat {
             @SerializedName("fish_category_id") public String fish_category_id;

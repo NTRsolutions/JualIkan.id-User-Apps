@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsAdress;
-import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsDirectionResponse;
 import com.synergics.ishom.jualikanid_user.Controller.GMapsTrack.GMapsTracking;
 import com.synergics.ishom.jualikanid_user.Controller.SQLiteHandler;
 import com.synergics.ishom.jualikanid_user.Controller.Setting;
@@ -27,6 +26,7 @@ import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiInterface;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseMidtransSnap;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponsePembayaran;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseRegister;
+import com.synergics.ishom.jualikanid_user.Model.TrackMaps.Direction;
 import com.synergics.ishom.jualikanid_user.View.Object.CustomerDetail;
 import com.synergics.ishom.jualikanid_user.View.Object.DelivTime;
 import com.synergics.ishom.jualikanid_user.View.Object.DetailTransaksi;
@@ -41,6 +41,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -135,10 +136,6 @@ public class PemabyaranActivity extends AppCompatActivity {
 
     private void checkPostPemesanan() {
 
-        Toast.makeText(this, postIdKeranjang + "|" + postIdUser + "|" + postAlamat + "|" + postLatAlamat + "|" + postPaymentType + "|"
-                + postIdKoperasi + "|" + postWaktuPengiriman + "|" + postJarakPengiriman + "|" + postBiayaPengiriman + "|" + postBeratOrder + "|" + postTotalPembayaran
-                + "|" + postIdWaktuPengiriman + "|" + postOrderStatus, Toast.LENGTH_SHORT).show();
-
         if (postPaymentType.isEmpty()){
             Toast.makeText(this, "Pastikan anda telah memilih metode pembayaran", Toast.LENGTH_SHORT).show();
             return;
@@ -220,7 +217,10 @@ public class PemabyaranActivity extends AppCompatActivity {
         dialog.setMessage("Loading...");
         dialog.show();
 
-        MidtransPayment body = new MidtransPayment(new DetailTransaksi("JI-" + postTotalPembayaran, Integer.parseInt(postTotalPembayaran)), new CustomerDetail(username, email, phone));
+        Random rand = new Random();
+        int  n = rand.nextInt(100) + 1;
+
+        MidtransPayment body = new MidtransPayment(new DetailTransaksi("JI-" + postTotalPembayaran + n, Integer.parseInt(postTotalPembayaran)), new CustomerDetail(username, email, phone));
 
         ApiInterface apiInterface = ApiClient.midtrans().create(ApiInterface.class);
         Call call = apiInterface.snapMidtrans(body);
@@ -416,14 +416,14 @@ public class PemabyaranActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 if (response.isSuccessful()){
 
-                    GMapsDirectionResponse directionResponse = (GMapsDirectionResponse) response.body();
-                    List<GMapsDirectionResponse.Route> routes = directionResponse.routes;
+                    Direction directionResponse = (Direction) response.body();
+                    List<Direction.Route> routes = directionResponse.routes;
 
-                    for (GMapsDirectionResponse.Route route : routes){
+                    for (Direction.Route route : routes){
 
-                        List<GMapsDirectionResponse.Legs> legses = route.legs;
+                        List<Direction.Legs> legses = route.legs;
 
-                        for (GMapsDirectionResponse.Legs legs : legses){
+                        for (Direction.Legs legs : legses){
 
                             distance = legs.distance.distanceValue;
                             Log.i("Distance " , distance + "");

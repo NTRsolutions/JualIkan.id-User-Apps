@@ -2,10 +2,12 @@ package com.synergics.ishom.jualikanid_user;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,9 +16,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -84,6 +88,8 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private Setting setting;
 
+    private LinearLayout layoutNotification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +113,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         view = navigationView.getHeaderView(0);
+
+        layoutNotification = (LinearLayout) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.btn_riwayat_order));
 
         //setting content header navigation drawer
         navHeaderContent();
@@ -300,18 +308,19 @@ public class MainActivity extends AppCompatActivity
                     public void onInject(final Integer data, IViewInjector injector) {}
                 })
                 .attachTo(recyclerView);
-
-        //get Menu From Server
-        getMenuFromServer(myLoc);
     }
 
     private void getMenuFromServer(LatLng myLoc) {
+
+        menus.clear();
+        images.clear();
 
         menus.add(new ItemImageViewPager("Ini","Buat","Image Pager"));
         menus.add("Buat Search");
 
         String lat = String.valueOf(myLoc.latitude);
         String lng = String.valueOf(myLoc.longitude);
+        String id = db.getUser().user_id;
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
@@ -321,8 +330,9 @@ public class MainActivity extends AppCompatActivity
 
         RequestBody reLat = RequestBody.create(MediaType.parse("text/plain"), lat);
         RequestBody reLng = RequestBody.create(MediaType.parse("text/plain"), lng);
+        RequestBody reid = RequestBody.create(MediaType.parse("text/plain"), id);
 
-        Call call = apiInterface.menu(reLat, reLng);
+        Call call = apiInterface.menu(reLat, reLng, reid);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -353,6 +363,21 @@ public class MainActivity extends AppCompatActivity
                             if (size == 1 || size == 3){
                                 menus.add(new ItemMenu(i, size , null));
                             }
+                        }
+
+                        if (res.data.order_total != 0){
+                            layoutNotification.setGravity(Gravity.CENTER_VERTICAL);
+                            layoutNotification.removeAllViews();
+                            TextView textNotification = new TextView(getApplicationContext());
+                            textNotification.setGravity(Gravity.CENTER);
+                            textNotification.setTypeface(null, Typeface.BOLD);
+                            ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(80, 80);
+                            textNotification.setLayoutParams(params);
+                            textNotification.setTextSize(14f);
+                            textNotification.setBackground(getResources().getDrawable(R.drawable.back_blue_dark_round));
+                            textNotification.setTextColor(getResources().getColor(R.color.whiteBlue));
+                            textNotification.setText(res.data.order_total+"");
+                            layoutNotification.addView(textNotification);
                         }
 
                     }else {
@@ -497,6 +522,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
+        getMenuFromServer(getMyLocation());
         super.onResume();
     }
 }

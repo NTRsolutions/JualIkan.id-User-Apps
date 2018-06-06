@@ -71,7 +71,15 @@ public class KeranjangActivity extends AppCompatActivity {
     }
 
     private void setRecycleview() {
-        R
+        //inisialisasi recyclwview
+        recyclerView = findViewById(R.id.recycle);
+
+        //setting layout manager
+        manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+
+        //setting slimAdapter
+        slimAdapter = SlimAdapter.create()
                 .register(R.layout.layout_cart_item, new SlimInjector<ResponseKeranjang.Keranjang>() {
                     @Override
                     public void onInject(final ResponseKeranjang.Keranjang data, IViewInjector injector) {

@@ -25,6 +25,7 @@ public class SessionManager {
     private static final String PREF_NAME = "AsianGames";
 
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+    private static final String KEY_IS_NOTIF= "isNotif";
 
     public SessionManager(Context context) {
         this._context = context;
@@ -44,5 +45,19 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return pref.getBoolean(KEY_IS_LOGGED_IN, false);
+    }
+
+    public void setNotif(boolean isNotif) {
+
+        editor.putBoolean(KEY_IS_NOTIF, isNotif);
+
+        // commit changes
+        editor.commit();
+
+        Log.d(TAG, "User login session modified!");
+    }
+
+    public boolean isNotif(){
+        return pref.getBoolean(KEY_IS_NOTIF, false);
     }
 }

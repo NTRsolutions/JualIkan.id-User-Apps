@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiClient;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiInterface;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderDetail;
-import com.synergics.ishom.jualikanid_user.View.WebViewActivity;
 
 import net.idik.lib.slimadapter.SlimAdapter;
 import net.idik.lib.slimadapter.SlimInjector;
@@ -101,6 +100,8 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         getDataFromServer();
     }
+
+
 
     private void getDataFromServer() {
         String id = bundle.getString("orderId");
