@@ -2,6 +2,7 @@ package com.synergics.ishom.jualikanid_user;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -13,11 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.synergics.ishom.jualikanid_user.Controller.AppConfig;
 import com.synergics.ishom.jualikanid_user.Controller.SQLiteHandler;
 import com.synergics.ishom.jualikanid_user.Controller.Setting;
@@ -91,6 +94,7 @@ public class FishDetailActivity extends AppCompatActivity {
 
         setting = new Setting(this);
         setting.forceEnableGPSAcess();
+        setting.getLocation();
 
         //setting and insialisasi toolbar
         setToolbar();
@@ -112,6 +116,13 @@ public class FishDetailActivity extends AppCompatActivity {
         toolbarTitle.setText(title);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setting.forceEnableGPSAcess();
+        setting.getLocation();
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -182,9 +193,28 @@ public class FishDetailActivity extends AppCompatActivity {
                                     TextView kategori  = view.findViewById(R.id.kategori);
                                     TextView ketersediaan = view.findViewById(R.id.ketersediaan);
                                     TextView caption = view.findViewById(R.id.caption);
+                                    TextView namaKoperasi = view.findViewById(R.id.namaKoperasi);
+                                    final TextView statusKoperasi = view.findViewById(R.id.statusKoperasi);
+                                    ImageView imageKoperasi = view.findViewById(R.id.imageKoperasi);
+                                    TextView moreFish = view.findViewById(R.id.moreFish);
+
+                                    moreFish.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(getApplicationContext(), FishKoperasiActivity.class);
+                                            intent.putExtra("koperasi_id", data.fish_koperasi.id);
+                                            intent.putExtra("koperasi_name", data.fish_koperasi.name);
+                                            startActivity(intent);
+                                        }
+                                    });
 
                                     LinearLayout bgReview = view.findViewById(R.id.bgReview);
                                     LinearLayout bgRating = view.findViewById(R.id.bgRating);
+
+                                    namaKoperasi.setText(data.fish_koperasi.name);
+                                    statusKoperasi.setText(data.fish_koperasi.status);
+
+                                    Picasso.with(view.getContext()).load(AppConfig.url + data.fish_koperasi.image).into(imageKoperasi);
 
                                     if (data.fish_total_rating != 0){
                                         bgReview.setVisibility(View.VISIBLE);
@@ -233,7 +263,7 @@ public class FishDetailActivity extends AppCompatActivity {
                                     btn.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            postKeranjang(data.fish_id, data.fish_koperasi_id);
+                                            postKeranjang(data.fish_id, data.fish_koperasi.id);
                                         }
                                     });
                                 }
@@ -275,6 +305,8 @@ public class FishDetailActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), KeranjangActivity.class);
                         startActivity(intent);
                         finish();
+                    }else {
+                        
                     }
                     Toast.makeText(FishDetailActivity.this, res.message, Toast.LENGTH_SHORT).show();
                 }else {

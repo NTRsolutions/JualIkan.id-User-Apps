@@ -174,7 +174,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         }else if (status == 3){
             return "Finished";
         }else if (status == 2){
-            return "Sedang di Korim";
+            return "Sedang di Kirim";
         }
         else {
             return "";

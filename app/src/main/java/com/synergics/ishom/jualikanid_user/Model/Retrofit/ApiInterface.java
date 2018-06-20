@@ -99,7 +99,7 @@ public interface ApiInterface {
                                      @Part("postOrderStatus") RequestBody postOrderStatus);
 
     @Multipart
-    @POST("menu.php")
+    @POST("menu2.php")
     Call<ResponseHome> menu(@Part("lat") RequestBody lat,
                             @Part("lng") RequestBody lng,
                             @Part("user_id") RequestBody user_id);
@@ -130,9 +130,18 @@ public interface ApiInterface {
     Call<ResponseKategori> kategori(@Part("cat_id") RequestBody cat);
 
     @Multipart
+    @POST("koperasi_fish.php")
+    Call<ResponseKategori> koperasi_fish(@Part("koperasi_id") RequestBody cat);
+
+    @Multipart
     @POST("search_fish.php")
     Call<ResponseKategori> serach_kategori(@Part("cat_id") RequestBody cat,
                                     @Part("search") RequestBody search);
+
+    @Multipart
+    @POST("koperasi_search_fish.php")
+    Call<ResponseKategori> search_koperasi(@Part("koperasi_id") RequestBody cat,
+                                           @Part("search") RequestBody search);
 
     @Multipart
     @POST("processed-order-detail.php")

@@ -10,15 +10,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.squareup.picasso.Picasso;
 import com.synergics.ishom.jualikanid_user.Controller.AppConfig;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiClient;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.ApiInterface;
-import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseBantuan;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseHome;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseKategori;
 
 import net.idik.lib.slimadapter.SlimAdapter;
 import net.idik.lib.slimadapter.SlimInjector;
@@ -36,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BantuanActivity extends AppCompatActivity {
+public class FishKoperasiActivity extends AppCompatActivity {
 
     //recycleview
     private SlimAdapter slimAdapter;
@@ -52,10 +56,10 @@ public class BantuanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bantuan);
+        setContentView(R.layout.activity_fish_koperasi);
 
         bundle = getIntent().getExtras();
-
+        
         setToolbar();
 
         //setting tampilan menu
@@ -63,7 +67,7 @@ public class BantuanActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        String title = "Bantuan";
+        String title = bundle.getString("koperasi_name");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,7 +138,7 @@ public class BantuanActivity extends AppCompatActivity {
 
     private void getSearch(String newText, final ArrayList<Object> dataNew) {
         //get data from bundle intent
-        String user_level = AppConfig.user_level;
+        String fish_id = bundle.getString("koperasi_id");
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
@@ -142,41 +146,43 @@ public class BantuanActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.jualikanService().create(ApiInterface.class);
 
-        RequestBody reUserLevel = RequestBody.create(MediaType.parse("text/plain"), user_level);
+        RequestBody reCat = RequestBody.create(MediaType.parse("text/plain"), fish_id);
         RequestBody reSearch = RequestBody.create(MediaType.parse("text/plain"), newText);
 
-        Call call = apiInterface.serach_bantuan(reUserLevel, reSearch);
+        Call call = apiInterface.search_koperasi(reCat, reSearch);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
 
                 if (response.isSuccessful()){
-                    ResponseBantuan res= (ResponseBantuan) response.body();
+                    ResponseKategori res= (ResponseKategori) response.body();
 
                     if (res.status){
 
-                        List<ResponseBantuan.Bantuan> datas = res.data;
+                        List<ResponseHome.Data.FishCat.Fish> fishes = res.data;
 
-                        if (datas.size() == 0){
-
+                        if (fishes.size() == 0){
                             TextView text = (TextView) findViewById(R.id.txtNotFound);
                             text.setVisibility(TextView.VISIBLE);
-
                         }else {
                             TextView text = (TextView) findViewById(R.id.txtNotFound);
                             text.setVisibility(TextView.INVISIBLE);
                         }
 
-                        for (ResponseBantuan.Bantuan data : datas){
-                            dataNew.add(data);
+                        for (ResponseHome.Data.FishCat.Fish fish : fishes){
+                            dataNew.add(fish);
                         }
 
                     }else {
-                        Toast.makeText(getApplicationContext(), "Gagal Ambil Bantuan !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Gagal Ambil Fish Kategori !", Toast.LENGTH_SHORT).show();
+                        TextView text = (TextView) findViewById(R.id.txtNotFound);
+                        text.setVisibility(TextView.VISIBLE);
                     }
 
                 }else {
-                    Toast.makeText(getApplicationContext(), "Register failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to access server !", Toast.LENGTH_SHORT).show();
+                    TextView text = (TextView) findViewById(R.id.txtNotFound);
+                    text.setVisibility(TextView.VISIBLE);
                 }
 
                 progressDialog.hide();
@@ -204,11 +210,11 @@ public class BantuanActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycle);
 
         //setting grid layout
-        grid = new GridLayoutManager(getApplicationContext(), 1);
+        grid = new GridLayoutManager(getApplicationContext(), 2);
         grid.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                return slimAdapter.getItem(position) instanceof ResponseHome.Data.FishCat.Fish ? 1 : 1;
+                return slimAdapter.getItem(position) instanceof ResponseHome.Data.FishCat.Fish ? 1 : 2;
             }
         });
         recyclerView.setLayoutManager(grid);
@@ -216,22 +222,46 @@ public class BantuanActivity extends AppCompatActivity {
         //setting slimAdapter
         slimAdapter = SlimAdapter.create()
                 //recycle in view pager
-                .register(R.layout.layout_bantuan_item, new SlimInjector<ResponseBantuan.Bantuan>() {
+                .register(R.layout.layout_fish_category, new SlimInjector<ResponseHome.Data.FishCat.Fish>() {
                     @Override
-                    public void onInject(final ResponseBantuan.Bantuan data, IViewInjector injector) {
+                    public void onInject(final ResponseHome.Data.FishCat.Fish data, IViewInjector injector) {
                         injector.with(R.id.item, new IViewInjector.Action() {
                             @Override
                             public void action(View view) {
                                 TextView title = view.findViewById(R.id.title);
-                                title.setText(data.articel_name);
+                                TextView harga = view.findViewById(R.id.caption);
+                                TextView ukuran = view.findViewById(R.id.ukuran);
+                                TextView kondisi = view.findViewById(R.id.kondisi);
+                                TextView penjual = view.findViewById(R.id.penjual);
+
+                                ImageView image = view.findViewById(R.id.image);
+
+                                LinearLayout bgRating = view.findViewById(R.id.bgRating);
+                                RatingBar rating = view.findViewById(R.id.rating);
+                                TextView ratingText = view.findViewById(R.id.ratingText);
+
+                                title.setText(data.fish_name);
+                                ukuran.setText(data.fish_size_id);
+                                kondisi.setText(data.fish_condition_id);
+                                harga.setText("Rp. " + money(Integer.parseInt(data.fish_price)));
+                                penjual.setText(data.fish_distribution_location);
+
+                                if (data.fish_total_rating != 0){
+                                    bgRating.setVisibility(View.VISIBLE);
+                                    rating.setRating(data.fish_rating);
+                                    ratingText.setText(data.fish_total_rating + " Reviews");
+                                }
+
+                                Picasso.with(view.getContext())
+                                        .load(AppConfig.url+data.fish_image)
+                                        .into(image);
 
                                 view.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                                        intent.putExtra("bantuan_id", data.articel_id);
-                                        intent.putExtra("web_name", data.articel_name);
-                                        intent.putExtra("web_url", data.articel_url);
+                                        Intent intent = new Intent(getApplicationContext(), FishDetailActivity.class);
+                                        intent.putExtra("fish_id", data.fish_id);
+                                        intent.putExtra("fish_name", data.fish_name);
                                         startActivity(intent);
                                     }
                                 });
@@ -249,7 +279,7 @@ public class BantuanActivity extends AppCompatActivity {
 
     private void getItemFromServer() {
         //get data from bundle intent
-        String user_level = AppConfig.user_level;
+        String fish_id = bundle.getString("koperasi_id");
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
@@ -257,30 +287,30 @@ public class BantuanActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.jualikanService().create(ApiInterface.class);
 
-        RequestBody reUserLevel = RequestBody.create(MediaType.parse("text/plain"), user_level);
+        RequestBody reCat = RequestBody.create(MediaType.parse("text/plain"), fish_id);
 
-        Call call = apiInterface.bantuan(reUserLevel);
+        Call call = apiInterface.koperasi_fish(reCat);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
 
                 if (response.isSuccessful()){
-                    ResponseBantuan res= (ResponseBantuan) response.body();
+                    ResponseKategori res= (ResponseKategori) response.body();
 
                     if (res.status){
 
-                        List<ResponseBantuan.Bantuan> datas = res.data;
+                        List<ResponseHome.Data.FishCat.Fish> fishes = res.data;
 
-                        for (ResponseBantuan.Bantuan data : datas){
-                            items.add(data);
+                        for (ResponseHome.Data.FishCat.Fish fish : fishes){
+                            items.add(fish);
                         }
 
                     }else {
-                        Toast.makeText(getApplicationContext(), "Gagal Ambil Bantuan !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Gagal Ambil Fish Kategori !", Toast.LENGTH_SHORT).show();
                     }
 
                 }else {
-                    Toast.makeText(getApplicationContext(), "Register failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to access server!", Toast.LENGTH_SHORT).show();
                 }
 
                 progressDialog.hide();

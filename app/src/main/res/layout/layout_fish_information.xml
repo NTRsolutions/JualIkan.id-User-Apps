@@ -255,6 +255,74 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:textColor="@color/black34"
+                android:text="Koperasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/moreFish"
+                android:textSize="18dp"
+                android:textColor="@color/blueFont"
+                android:text="More Fish"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/koperasi"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageKoperasi"
+                android:layout_marginRight="8dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/namaKoperasi"
+                    android:textColor="@color/black34"
+                    android:text="namaKoperasi"
+                    android:textSize="16dp"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/statusKoperasi"
+                    android:textColor="@color/black73"
+                    android:text="statusKoperasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
         <TextView
             android:layout_marginTop="16dp"
             android:textSize="18dp"
@@ -265,7 +333,7 @@
 
         <TextView
             android:id="@+id/caption"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/blackB2"
             android:text="Deskripsi"
             android:layout_width="match_parent"

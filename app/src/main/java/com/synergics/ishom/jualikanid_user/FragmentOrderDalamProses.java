@@ -95,7 +95,7 @@ public class FragmentOrderDalamProses extends Fragment {
                                         view.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                if (data.orderStatus == "2"){
+                                                if (data.orderStatus.equals("2")){
                                                     Intent intent = new Intent(viewFragment.getContext(), TrackingDeliveryActivity.class);
                                                     intent.putExtra("order_id", data.orderIdNumber);
                                                     startActivity(intent);
