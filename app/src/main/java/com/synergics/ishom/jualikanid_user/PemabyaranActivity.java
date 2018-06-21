@@ -148,7 +148,7 @@ public class PemabyaranActivity extends AppCompatActivity {
         if (!postIdKeranjang.isEmpty() && !postIdUser.isEmpty() && !postAlamat.isEmpty() && !postLatAlamat.isEmpty() && !postLngAlamat.isEmpty() && !postPaymentType.isEmpty() &&
                 !postIdKoperasi.isEmpty() && !postWaktuPengiriman.isEmpty() && !postJarakPengiriman.isEmpty() && !postBiayaPengiriman.isEmpty() && !postBeratOrder.isEmpty() &&
                 !postTotalPembayaran.isEmpty() && !postIdWaktuPengiriman.isEmpty() && !postOrderStatus.isEmpty()){
-            if (postOrderStatus == "0"){
+            if (postOrderStatus.equals("0")){
                 fetchMidtransUrl();
             }else {
                 postToDatabase();
