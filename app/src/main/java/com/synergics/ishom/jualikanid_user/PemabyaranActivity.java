@@ -73,6 +73,8 @@ public class PemabyaranActivity extends AppCompatActivity {
     private LatLng origin, destination;
     private CheckBox radioCash, radioTrasfer, radioSaldo;
 
+    private int saldo = 0;
+
     //data yang akan di post
     private String postIdKeranjang = "", postIdUser = "", postAlamat = "", postLatAlamat = "", postLngAlamat = "", postPaymentType = "",
             postIdKoperasi = "", postWaktuPengiriman = "", postJarakPengiriman = "", postBiayaPengiriman = "", postBeratOrder = "",
@@ -385,7 +387,6 @@ public class PemabyaranActivity extends AppCompatActivity {
 
     private void countAndDisplay(){
         SQLiteHandler db = new SQLiteHandler(getApplicationContext());
-        int saldo = Integer.parseInt(db.getUser().user_saldo);
         txtSaldo.setText("Rp. " + money(saldo));
 
         biayaPengiriman = (int) (distance/1000 * biayaPerKm);
@@ -513,11 +514,16 @@ public class PemabyaranActivity extends AppCompatActivity {
                             latKoperasi = Double.valueOf(res.cart.koperasi.lat);
                             lngKoperasi = Double.valueOf(res.cart.koperasi.lng);
                             postIdKoperasi = res.cart.koperasi.id;
+                            saldo = Integer.parseInt(res.user.user_saldo);
 
                             for (ResponsePembayaran.Items item : res.cart.items){
                                 keranjang.add(item.id);
                                 beratKeranjang =  beratKeranjang + item.qty;
                                 items.add(item);
+                            }
+
+                            if (!res.user.check){
+                                radioSaldo.setEnabled(false);
                             }
 
                             for (ResponsePembayaran.DeliveryTime time : res.deliveryTimes){

@@ -10,5 +10,6 @@ public class AppConfig {
     //    public static String url = "http://192.168.1.18/jualikan.id/";
 //    public static String url = "http://192.168.43.168/jualikan.id/";
     public static String url = "http://ishom.jagopesan.com/jualikan.id/";
+    public static String url_image = "http://ishom.jagopesan.com/jualikan.id/frontend/web/";
     public static String user_level = "1";
 }

@@ -15,6 +15,7 @@ public class ResponsePembayaran {
     @SerializedName("statusOrder") public boolean statusOrder;
     @SerializedName("statusMessage") public String messageOrder;
     @SerializedName("cart") public Keranjang cart;
+    @SerializedName("user") public Profile user;
     @SerializedName("delivery_time") public List<DeliveryTime> deliveryTimes;
     @SerializedName("payment_type") public List<PaymentType> paymentTypes;
     @SerializedName("delviery_cost_pkm") public int delviery_cost_pkm;
@@ -23,6 +24,14 @@ public class ResponsePembayaran {
         @SerializedName("items") public List<Items> items;
         @SerializedName("total") public int total;
         @SerializedName("koperasi") public Koperasi koperasi;
+    }
+
+    public class Profile {
+        @SerializedName("user_id") public String user_id;
+        @SerializedName("user_full_name") public String user_full_name;
+        @SerializedName("user_image") public String user_image;
+        @SerializedName("user_saldo") public String user_saldo;
+        @SerializedName("check") public boolean check;
     }
 
     public class DeliveryTime{

@@ -65,9 +65,12 @@
         <activity android:name=".TrackingDeliveryActivity">
             <intent-filter>
                 <action android:name="ORDER_NOTIF" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ReivewActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

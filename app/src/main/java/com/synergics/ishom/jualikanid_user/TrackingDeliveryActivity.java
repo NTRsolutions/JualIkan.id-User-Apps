@@ -290,7 +290,7 @@ public class TrackingDeliveryActivity extends AppCompatActivity implements OnMap
 
     private void trackDriver(ResponseTrackingOrder.Driver driver) {
         DatabaseReference firebaseDb = FirebaseDatabase.getInstance().getReference();
-        firebaseDb.child("Tracking").child(driver.device_id).addValueEventListener(new ValueEventListener() {
+        firebaseDb.child("Tracking").child(driver.id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Location location = new Location("Driver Location");

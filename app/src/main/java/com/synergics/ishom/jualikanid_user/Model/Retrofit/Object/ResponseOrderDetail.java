@@ -32,6 +32,7 @@ public class ResponseOrderDetail {
     public class CartItem {
         @SerializedName("id") public String id;
         @SerializedName("fish_id") public String fish_id;
+        @SerializedName("koperasi_id") public String koperasi_id;
         @SerializedName("image") public String image;
         @SerializedName("name") public String name;
         @SerializedName("qty") public int qty;

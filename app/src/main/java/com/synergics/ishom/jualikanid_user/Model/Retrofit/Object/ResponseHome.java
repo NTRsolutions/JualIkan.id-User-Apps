@@ -17,6 +17,7 @@ public class ResponseHome {
         @SerializedName("promo") public ArrayList<Promo> promos;
         @SerializedName("fish_cat") public ArrayList<FishCat> fishCats;
         @SerializedName("order_total") public int order_total;
+        @SerializedName("user") public Profile user;
 
         public class FishCat {
             @SerializedName("fish_category_id") public String fish_category_id;
@@ -46,6 +47,13 @@ public class ResponseHome {
             @SerializedName("promo_start") public String promo_start;
             @SerializedName("promo_end") public String promo_end;
             @SerializedName("promo_image") public String promo_image;
+        }
+
+        public class Profile {
+            @SerializedName("user_id") public String user_id;
+            @SerializedName("user_full_name") public String user_full_name;
+            @SerializedName("user_image") public String user_image;
+            @SerializedName("user_saldo") public String user_saldo;
         }
     }
 }

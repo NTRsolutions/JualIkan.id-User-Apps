@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiwayatOrderActivity extends AppCompatActivity {
+public class  RiwayatOrderActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;

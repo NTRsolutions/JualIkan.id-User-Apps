@@ -79,11 +79,27 @@ public class DetailOrderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
 
         slimAdapter = SlimAdapter.create()
-                .register(R.layout.layout_pembayaran_item, new SlimInjector<ResponseOrderDetail.CartItem>() {
+                .register(R.layout.layout_order_fish, new SlimInjector<ResponseOrderDetail.CartItem>() {
                     @Override
                     public void onInject(final ResponseOrderDetail.CartItem data, IViewInjector injector) {
                         injector.text(R.id.nama, data.name + " (" + data.qty + "Kg)")
-                                .text(R.id.harga, "Rp. " + money(data.price));
+                                .text(R.id.harga, "Rp. " + money(data.price))
+                                .with(R.id.item, new IViewInjector.Action() {
+                                    @Override
+                                    public void action(View view) {
+                                        TextView review = view.findViewById(R.id.review);
+                                        review.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Intent intent = new Intent(getApplicationContext(), ReivewActivity.class);
+                                                intent.putExtra("koperasi_id",data.koperasi_id);
+                                                intent.putExtra("fish_id", data.fish_id);
+                                                intent.putExtra("fish_name", data.name);
+                                                startActivity(intent);
+                                            }
+                                        });
+                                    }
+                                });
                     }
                 })
                 .attachTo(recyclerView);

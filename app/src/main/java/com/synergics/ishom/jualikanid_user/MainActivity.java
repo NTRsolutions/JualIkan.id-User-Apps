@@ -350,6 +350,13 @@ public class MainActivity extends AppCompatActivity
                             images.add(new ItemImageViewPager(promo.promo_id, promo.promo_name, AppConfig.url+promo.promo_image));
                         }
 
+                        txtUsername.setText(data.user.user_full_name);
+                        txtSaldo.setText("Rp. " + money(Integer.parseInt(data.user.user_saldo)));
+
+                        Picasso.with(view.getContext())
+                                .load(AppConfig.url +data.user.user_image)
+                                .into(imgUser);
+
                         for (ResponseHome.Data.FishCat fishCat : fishCats){
                             menus.add(fishCat);
                             ArrayList<ResponseHome.Data.FishCat.Fish> fishes = fishCat.fishes;

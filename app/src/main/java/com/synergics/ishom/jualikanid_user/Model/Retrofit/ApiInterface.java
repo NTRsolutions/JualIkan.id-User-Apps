@@ -14,6 +14,7 @@ import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderDe
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderProcessed;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponsePembayaran;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseRegister;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseReview;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseTrackingOrder;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.Direction;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.NearbyLocation;
@@ -171,4 +172,18 @@ public interface ApiInterface {
     @Multipart
     @POST("order-detail-tracking.php")
     Call<ResponseTrackingOrder> trackingOrder(@Part("order_id") RequestBody order_id);
-}
+
+    @Multipart
+    @POST("review-get.php")
+    Call<ResponseReview> getReview(@Part("user_id") RequestBody user_id,
+                                   @Part("fish_id") RequestBody fish_id,
+                                   @Part("koperasi_id") RequestBody koperasi_id);
+
+
+    @Multipart
+    @POST("review-post.php")
+    Call<ResponseMessage> postReview(@Part("user_id") RequestBody user_id,
+                                   @Part("fish_id") RequestBody fish_id,
+                                   @Part("koperasi_id") RequestBody koperasi_id,
+                                   @Part("review_text") RequestBody review_text,
+                                   @Part("review_value") RequestBody review_value);}

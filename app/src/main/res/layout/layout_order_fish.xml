@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/itemClick"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/nama"
+            android:text="Namam Ikan"
+            android:textColor="@color/black34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/review"
+            android:clickable="true"
+            android:textColor="@color/whiteBlue"
+            android:background="@drawable/back_blue_dark_rounded_4dp"
+            android:gravity="right"
+            android:text="Review"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:paddingRight="6dp"
+            android:paddingLeft="6dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/harga"
+            android:textColor="@color/darkBlue"
+            android:gravity="right"
+            android:text="Rp. 1,000,000"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+        
+    </LinearLayout>
+
+</LinearLayout>
