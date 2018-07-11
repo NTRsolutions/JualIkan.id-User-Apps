@@ -437,6 +437,15 @@ public class MainActivity extends AppCompatActivity
         Picasso.with(view.getContext())
                 .load(AppConfig.url +user.user_image)
                 .into(imgUser);
+
+        ImageView imgProfile = view.findViewById(R.id.btnSetting);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

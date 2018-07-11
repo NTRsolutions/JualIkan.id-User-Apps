@@ -13,8 +13,10 @@ import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseMidtran
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderDetail;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseOrderProcessed;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponsePembayaran;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseProfile;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseRegister;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseReview;
+import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseSaldo;
 import com.synergics.ishom.jualikanid_user.Model.Retrofit.Object.ResponseTrackingOrder;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.Direction;
 import com.synergics.ishom.jualikanid_user.Model.TrackMaps.NearbyLocation;
@@ -24,6 +26,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -61,8 +64,11 @@ public interface ApiInterface {
 
     //================================= JualIkan.id endpoint web service ============================================//
 
-    @POST("checkout.php")
-    Call<ResponseMidtransSnap> snapMidtrans(@Body MidtransPayment body);
+    @POST("transactions")
+    Call<ResponseMidtransSnap> snapMidtrans(@Header("Authorization") String auth,
+                                            @Header("Content-Type") String content_type,
+                                            @Header("Accept") String accept,
+                                            @Body MidtransPayment body);
 
     //====================================  midtrans endpoint web service  ===========================================//
 
@@ -186,4 +192,25 @@ public interface ApiInterface {
                                    @Part("fish_id") RequestBody fish_id,
                                    @Part("koperasi_id") RequestBody koperasi_id,
                                    @Part("review_text") RequestBody review_text,
-                                   @Part("review_value") RequestBody review_value);}
+                                   @Part("review_value") RequestBody review_value);
+
+    @Multipart
+    @POST("riwayat_saldo.php")
+    Call<ResponseSaldo> saldo_history(@Part("user_id") RequestBody driver_id);
+
+    @Multipart
+    @POST("profile.php")
+    Call<ResponseProfile> profile(@Part("user_id") RequestBody driver_id);
+
+    @Multipart
+    @POST("update_profile.php")
+    Call<ResponseMessage> update_profile(@Part("user_id") RequestBody driver_id,
+                                         @Part("old_password") RequestBody old_password,
+                                         @Part("new_password") RequestBody new_password);
+
+    @Multipart
+    @POST("update_saldo.php")
+    Call<ResponseMessage> tambah_saldo(@Part("user_id") RequestBody driver_id,
+                                         @Part("saldo") RequestBody saldo);
+
+}

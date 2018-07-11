@@ -51,7 +51,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://jualikan.herokuapp.com/jualIkan/")
+                    .baseUrl("https://app.sandbox.midtrans.com/snap/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();

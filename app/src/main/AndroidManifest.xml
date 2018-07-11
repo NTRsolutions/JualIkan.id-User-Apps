@@ -70,7 +70,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReivewActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".RiwayatSaldoActivity" />
+        <activity android:name=".UpdatePasswordActivity" />
+        <activity android:name=".TambahSaldoActivity"></activity>
     </application>
 
 </manifest>

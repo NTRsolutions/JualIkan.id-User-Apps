@@ -20,6 +20,7 @@ public class ResponseOrderDetail {
         @SerializedName("cart") public Cart cart;
         @SerializedName("orderLocation") public OrderLocation orderLocation;
         @SerializedName("payment") public Payment payment;
+        @SerializedName("time") public Time time;
         @SerializedName("status") public int status;
         @SerializedName("status_txt") public String statusText;
     }
@@ -27,6 +28,12 @@ public class ResponseOrderDetail {
     public class Cart {
         @SerializedName("items") public List<CartItem> items;
         @SerializedName("total") public int total;
+    }
+
+    public class Time {
+        @SerializedName("id") public String id;
+        @SerializedName("start") public String start;
+        @SerializedName("end") public String end;
     }
 
     public class CartItem {

@@ -103,6 +103,7 @@ public class FragmentOrderDalamProses extends Fragment {
                                                     Intent intent = new Intent(viewFragment.getContext(), DetailOrderActivity.class);
                                                     intent.putExtra("orderId", data.orderIdNumber);
                                                     intent.putExtra("orderName", "Order " + data.orderId);
+                                                    intent.putExtra("orderStatus", data.orderStatus);
                                                     startActivity(intent);
                                                 }
 
@@ -114,9 +115,12 @@ public class FragmentOrderDalamProses extends Fragment {
                     }
                 })
                 .attachTo(recyclerView);
-        
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         getDataFromDatabase();
-        
     }
 
     private void getDataFromDatabase() {

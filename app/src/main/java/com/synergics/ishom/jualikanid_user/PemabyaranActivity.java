@@ -225,7 +225,7 @@ public class PemabyaranActivity extends AppCompatActivity {
         MidtransPayment body = new MidtransPayment(new DetailTransaksi("JI-" + postTotalPembayaran + n, Integer.parseInt(postTotalPembayaran)), new CustomerDetail(username, email, phone));
 
         ApiInterface apiInterface = ApiClient.midtrans().create(ApiInterface.class);
-        Call call = apiInterface.snapMidtrans(body);
+        Call call = apiInterface.snapMidtrans("Basic U0ItTWlkLXNlcnZlci0wekxTWXlrSEJKbFFNenRiOExSanB0VXg6", "application/json","application/json",body);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {

@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class DetailOrderActivity extends AppCompatActivity {
 
     private TextView txtStatusOrder, txtTotalKeranjang1, txtAlamat, txtTotalKeranjang2,
-            txtBiayaPengiriman, txtTotalBiaya, txtOrderPaymentLink;
+            txtBiayaPengiriman, txtTotalBiaya, txtOrderPaymentLink, txtNote, txtWaktuPengiriman;
 
     private LinearLayout orderPayment;
 
@@ -69,6 +69,8 @@ public class DetailOrderActivity extends AppCompatActivity {
         txtAlamat = findViewById(R.id.txtAlamat);
         txtBiayaPengiriman = findViewById(R.id.totalDelivery);
         txtTotalBiaya = findViewById(R.id.totalPembayaran);
+        txtNote = findViewById(R.id.txtNote);
+        txtWaktuPengiriman = findViewById(R.id.txtWaktuPengiriman);
 
         txtOrderPaymentLink = findViewById(R.id.oderPaymentLink);
         orderPayment = findViewById(R.id.orderPayment);
@@ -78,31 +80,45 @@ public class DetailOrderActivity extends AppCompatActivity {
         manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
 
-        slimAdapter = SlimAdapter.create()
-                .register(R.layout.layout_order_fish, new SlimInjector<ResponseOrderDetail.CartItem>() {
-                    @Override
-                    public void onInject(final ResponseOrderDetail.CartItem data, IViewInjector injector) {
-                        injector.text(R.id.nama, data.name + " (" + data.qty + "Kg)")
-                                .text(R.id.harga, "Rp. " + money(data.price))
-                                .with(R.id.item, new IViewInjector.Action() {
-                                    @Override
-                                    public void action(View view) {
-                                        TextView review = view.findViewById(R.id.review);
-                                        review.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                Intent intent = new Intent(getApplicationContext(), ReivewActivity.class);
-                                                intent.putExtra("koperasi_id",data.koperasi_id);
-                                                intent.putExtra("fish_id", data.fish_id);
-                                                intent.putExtra("fish_name", data.name);
-                                                startActivity(intent);
-                                            }
-                                        });
-                                    }
-                                });
-                    }
-                })
-                .attachTo(recyclerView);
+        if (Integer.parseInt(bundle.getString("orderStatus")) != 3 || Integer.parseInt(bundle.getString("orderStatus")) != 5){
+            slimAdapter = SlimAdapter.create()
+                    .register(R.layout.layout_pembayaran_item, new SlimInjector<ResponseOrderDetail.CartItem>() {
+                        @Override
+                        public void onInject(final ResponseOrderDetail.CartItem data, IViewInjector injector) {
+                            injector.text(R.id.nama, data.name + " (" + data.qty + "Kg)")
+                                    .text(R.id.harga, "Rp. " + money(data.price));
+                        }
+                    })
+                    .attachTo(recyclerView);
+        }else {
+            slimAdapter = SlimAdapter.create()
+                    .register(R.layout.layout_order_fish, new SlimInjector<ResponseOrderDetail.CartItem>() {
+                        @Override
+                        public void onInject(final ResponseOrderDetail.CartItem data, IViewInjector injector) {
+                            injector.text(R.id.nama, data.name + " (" + data.qty + "Kg)")
+                                    .text(R.id.harga, "Rp. " + money(data.price))
+                                    .with(R.id.item, new IViewInjector.Action() {
+                                        @Override
+                                        public void action(View view) {
+                                            TextView review = view.findViewById(R.id.review);
+                                            review.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Intent intent = new Intent(getApplicationContext(), ReivewActivity.class);
+                                                    intent.putExtra("koperasi_id",data.koperasi_id);
+                                                    intent.putExtra("fish_id", data.fish_id);
+                                                    intent.putExtra("fish_name", data.name);
+                                                    startActivity(intent);
+                                                }
+                                            });
+                                        }
+                                    });
+                        }
+                    })
+                    .attachTo(recyclerView);
+        }
+
+
 
         txtOrderPaymentLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +163,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                     if (order.status == 0){
                         orderPayment.setVisibility(View.VISIBLE);
                         paymentLink = order.payment.url;
+                        txtNote.setText("*harap melakukan pembayaran sebelum waktu jam" + order.time.start);
                     }
 
                     //mengatur bagian keranjang
@@ -157,6 +174,7 @@ public class DetailOrderActivity extends AppCompatActivity {
 
                     //mengatur alamat pengiriman
                     txtAlamat.setText(order.orderLocation.address);
+                    txtWaktuPengiriman.setText("Pukul : " + order.time.start + "-" + order.time.end);
 
                     //mengatur total semuanya
                     txtTotalBiaya.setText("Rp. " + money(order.payment.total));
